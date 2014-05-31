@@ -11,9 +11,8 @@ Chota is an awesome url shortener written in `Flask`, it is simple yet powerful.
 Run the `runserver.py` file and boom you are up and running, `python runserver.py`
 
 ###Contributing:
- - Implement a database to store url's
  - Improve loading speed
- - Make the website pretty
+ - Make the website more pretty
  - Improve the api
  - Deploy the application to Heroku/Pythonanywhere
 
