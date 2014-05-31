@@ -1,15 +1,16 @@
 from chota import app, db
-from flask import render_template, redirect, request, jsonify, flash
+from flask import render_template, redirect, request, flash
 import string
 import random
 import re
 import httplib2
 from urlparse import urlparse
-import json
 
 
 class Url(db.Model):
-
+    """
+    Class for creating models via SQLAlchemy
+    """
     __tablename__ = "Url"
     id = db.Column('url_id', db.Integer, primary_key=True)
     random_code = db.Column(db.String(80), unique=True)
@@ -24,6 +25,9 @@ class Url(db.Model):
 
 
 def _protocol(url):
+    """
+    Checks if http:// is present before Url
+    """
     parsed = urlparse(url)
     if parsed.scheme == "":
         return "http://"+url
@@ -50,7 +54,8 @@ def _is_valid_url(url):
 
 
 def _url_exists(url):
-    """Get the headers of a web resource to check if it exists
+    """
+    Get the headers of a web resource to check if it exists
     """
     h = httplib2.Http()
     try:
@@ -62,6 +67,9 @@ def _url_exists(url):
 
 
 def _random_string():
+    """
+    Generates a random code for adding to short url
+    """
     length = 6
     rv = ""
     for i in range(length):
@@ -70,23 +78,33 @@ def _random_string():
 
 
 def _shorten_url(url):
+    """
+    Functions returns short url
+    """
     url = _protocol(url.strip())
     if _url_exists(url):
         long_url = Url.query.filter_by(url=url).first()
+        #Checks if someone has already shortened the same url
         if long_url is None:
             random_code = _random_string()
             short_url = Url(random_code, url)
             db.session.add(short_url)
             db.session.commit()
-            return "127.0.0.1:5000/" + random_code
+            return "http://chota-tk.herokuapp.com/" + random_code
         else:
-            return "127.0.0.1:5000/" + long_url.random_code
+            #If the url is present in the db, it returns the already created
+            #short url
+            return "http://chota-tk.herokuapp.com/" + long_url.random_code
     else:
         return False
 
 
 def _expand_url(code):
+    """
+    Returns expanded url
+    """
     long_url = Url.query.filter_by(random_code=code).first()
+    #Checks if the short url is valid
     if long_url is None:
         return False
     else:
@@ -98,32 +116,8 @@ def main():
     return render_template('index.html')
 
 
-@app.route('/', methods=["POST"])
-def handle_api():
-    data = None
-    if request.json:
-        data = request.json
-    else:
-        return jsonify(success=False, message="Provide the long_url paramater")
-
-    try:
-        data = json.loads(request.data)
-    except ValueError:
-        return jsonify(success=False, message='Could not parse json.')
-
-    if not data or not data.get('long_url'):
-        return jsonify(success=False, message='long_url not present')
-    else:
-        long_url = data.get('long_url')
-        short_url = _shorten_url(long_url)
-        if not short_url:
-            return jsonify(success=False, message="Can't shorten URL")
-        else:
-            return jsonify(success=True, message=short_url)
-
-
-@app.route('/form_response', methods=["POST"])
-def handle_form():
+@app.route('/form', methods=["POST"])
+def form():
     url = request.form['url']
     short_url = _shorten_url(url)
     if not short_url:
@@ -135,11 +129,17 @@ def handle_form():
 
 @app.errorhandler(404)
 def handle_error():
+    """
+    404 error handler function
+    """
     return render_template("404.html")
 
 
 @app.route('/<string:handler>', methods=["GET"])
 def handle_url(handler=None):
+    """
+    Function to return short url's to original url
+    """
     long_url = _expand_url(handler)
     if not long_url:
         return redirect('/', code=302)
