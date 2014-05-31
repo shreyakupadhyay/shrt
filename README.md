@@ -1,5 +1,5 @@
 #Chota
-Chota is an awesome url shortener written in `Flask`, it is simple yet powerful. Fork this repo and play around with it, don't forget to make pull requests. This app is running on Heroku, http://chota-tk.herokuapp.com/ :)
+Chota is an awesome url shortener written in `Flask`, it is simple yet powerful. Fork this repo and play around with it, don't forget to make pull requests. See the app in [action](http://chota-tk.herokuapp.com/) :)
 
 <a href="http://imgur.com/KEIT77n"><img src="http://i.imgur.com/KEIT77n.png" title="Hosted by imgur.com" /></a>
 
@@ -13,7 +13,7 @@ Edit `__init__.py` and provide your db path instead of `os.environ['DATABASE_URL
 ###Contributing:
  - Improve loading speed
  - Make the website pretty
- - Improve the api
+ - Api for post and get requests
 
 ###License:
 Chota is distributed under MIT license, see license for more details
