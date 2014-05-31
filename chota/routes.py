@@ -1,10 +1,11 @@
 from chota import app, db
-from flask import render_template, redirect, request, flash
+from flask import render_template, redirect, request, flash, jsonify
 import string
 import random
 import re
 import httplib2
 from urlparse import urlparse
+import json
 
 
 class Url(db.Model):
@@ -114,6 +115,25 @@ def _expand_url(code):
 @app.route('/', methods=["GET"])
 def main():
     return render_template('index.html')
+
+
+@app.route('/', methods=["POST"])
+def api():
+    data = None
+    if request.json:
+        data = request.json
+    else:
+        return jsonify(success=False, message='Please provide JSON Data')
+
+    try:
+        data = json.loads(request.data)
+    except ValueError:
+        return jsonify(success=False, message='Could not parse json.')
+
+    long_url = data.get('long_url')
+    long_url = _protocol(long_url)
+    short_url = _shorten_url(long_url)
+    return jsonify(success=True, short_url=short_url)
 
 
 @app.route('/form', methods=["POST"])
