@@ -1,4 +1,4 @@
-from chota import app
+from chota import app, db
 from flask import render_template, redirect, request, jsonify, flash
 import string
 import random
@@ -7,7 +7,20 @@ import httplib2
 from urlparse import urlparse
 import json
 
-db = {}
+
+class Url(db.Model):
+
+    __tablename__ = "Url"
+    id = db.Column('url_id', db.Integer, primary_key=True)
+    random_code = db.Column(db.String(80), unique=True)
+    url = db.Column(db.String(120), unique=False)
+
+    def __init__(self, random_code, url):
+        self.random_code = random_code
+        self.url = url
+
+    def __repr__(self):
+        return '<url %r>' % self.url
 
 
 def _protocol(url):
@@ -59,18 +72,25 @@ def _random_string():
 def _shorten_url(url):
     url = _protocol(url.strip())
     if _url_exists(url):
-        random_code = _random_string()
-        db[random_code] = url
-        return "127.0.0.1:5000/" + random_code
+        long_url = Url.query.filter_by(url=url).first()
+        if long_url is None:
+            random_code = _random_string()
+            short_url = Url(random_code, url)
+            db.session.add(short_url)
+            db.session.commit()
+            return "127.0.0.1:5000/" + random_code
+        else:
+            return "127.0.0.1:5000/" + long_url.random_code
     else:
         return False
 
 
 def _expand_url(code):
-    if code in db.keys():
-        return db[code]
-    else:
+    long_url = Url.query.filter_by(random_code=code).first()
+    if long_url is None:
         return False
+    else:
+        return long_url.url
 
 
 @app.route('/', methods=["GET"])
