@@ -86,10 +86,18 @@ def _shorten_url(url):
         long_url = Url.query.filter_by(url=url).first()
         #Checks if someone has already shortened the same url
         if long_url is None:
+            inserted = False
             random_code = _random_string()
-            short_url = Url(random_code, url)
-            db.session.add(short_url)
-            db.session.commit()
+            while not inserted:
+                check_code = Url.query.filter_by(random_code=random_code). \
+                             first()
+                if check_code is None:
+                    short_url = Url(random_code, url)
+                    db.session.add(short_url)
+                    db.session.commit()
+                    inserted = True
+                else:
+                    random_code = _random_string()
             return "http://chota-tk.herokuapp.com/" + random_code
         else:
             #If the url is present in the db, it returns the already created
