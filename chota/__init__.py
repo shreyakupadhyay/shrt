@@ -4,7 +4,9 @@ import os
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+#Get the db url from Heroku
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///test.db"
+#os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
 
 

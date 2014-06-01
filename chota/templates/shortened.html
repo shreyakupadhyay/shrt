@@ -1,6 +1,11 @@
 {% extends "base.html" %}
+
 {% block content %}
 <p id="linkmsg">Oh, here is it is: </p>
 <p id="linkurl"> {{ url }} </p>
-<div id="qrcode"><img src="https://api.qrserver.com/v1/create-qr-code/?data={{ url }}&amp;size=180x180" alt="" title="qr-code" /></div>
+
+<!-- Gets the QR code for the shortened link -->
+<div id="qrcode">
+<img src="https://api.qrserver.com/v1/create-qr-code/?data={{ url }}&amp;size=180x180" alt="" title="qr-code" />
+</div>
 {% endblock %}

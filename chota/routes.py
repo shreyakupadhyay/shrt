@@ -111,8 +111,12 @@ def _expand_url(code):
         return long_url.url
 
 
+#app.route('/', methods=["POST"]) for API requests needs to implemented
 @app.route('/', methods=["GET"])
 def main():
+    """
+    Returns the main page upon GET request
+    """
     return render_template('index.html')
 
 
@@ -142,6 +146,7 @@ def handle_url(handler=None):
     """
     long_url = _expand_url(handler)
     if not long_url:
+        #Returns to the main page if the url is not presented in the database
         return redirect('/', code=302)
     else:
         return redirect(long_url, code=302)
