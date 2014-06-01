@@ -10,10 +10,22 @@ Chota is an awesome url shortener written in `Flask`, it is simple yet powerful.
 ###Usage:
 Edit `__init__.py` and provide your db path instead of `os.environ['DATABASE_URL']`, also add `db.create_all()` in the `runserver.py` file to create the db. That's all, Run the `runserver.py` file and boom, you are up and running :)
 
+###Api:
+The api is very basic at the moment but gets the job done, in order to shorten  url, send a GET request to chota-tk.herokuapp.com/api with long url.
+Request: 
+```
+curl http://chota-tk.herokuapp.com/api/google.com
+```
+Response:
+```
+{
+  "short_url": "http://chota-tk.herokuapp.com/czidce", 
+  "success": true
+}
+```
 ###Contributing:
  - Improve loading speed
  - Unittests will be appreciated 
- - Api for post and get requests
 
 ###License:
 Chota is distributed under MIT license, see license for more details
