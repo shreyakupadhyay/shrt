@@ -144,7 +144,7 @@ def handle_error():
     """
     404 error handler function
     """
-    return render_template("404.html")
+    return render_template("404.html"), 404
 
 
 @app.route('/<string:handler>', methods=["GET"])
