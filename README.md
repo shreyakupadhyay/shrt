@@ -12,7 +12,7 @@ Edit `__init__.py` and provide your db path instead of `os.environ['DATABASE_URL
 
 ###Contributing:
  - Improve loading speed
- - Make the website pretty
+ - Unittests will be appreciated 
  - Api for post and get requests
 
 ###License:
