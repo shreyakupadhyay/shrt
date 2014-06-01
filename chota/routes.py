@@ -1,5 +1,5 @@
 from chota import app, db
-from flask import render_template, redirect, request, flash
+from flask import render_template, redirect, request, flash, jsonify
 import string
 import random
 import re
@@ -145,6 +145,16 @@ def handle_error():
     404 error handler function
     """
     return render_template("404.html"), 404
+
+
+@app.route('/api/<long_url>', methods=["GET"])
+def api(long_url=None):
+    url = long_url
+    short_url = _shorten_url(url)
+    if not short_url:
+        return jsonify(success=False, message="Invalid url")
+    else:
+        return jsonify(success=True, short_url=short_url)
 
 
 @app.route('/<string:handler>', methods=["GET"])
