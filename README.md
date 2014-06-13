@@ -1,5 +1,5 @@
 #Chota
-Chota - meaning short - in Urdu is an awesome url shortener written in `Flask`, it is simple yet powerful. Fork this repo and play around with it, don't forget to make pull requests. See the app in [action](http://chota-tk.herokuapp.com/).
+Chota - meaning short in Urdu - is an awesome url shortener written in `Flask` as my personal project to dive deeper into flask, it is simple yet powerful. Fork this repo and play around with it, don't forget to make pull requests and make it even better. See the app in [action](http://chota-tk.herokuapp.com/).
 <a href="http://imgur.com/KEIT77n"><img src="http://i.imgur.com/KEIT77n.png" title="Hosted by imgur.com" /></a>
 
 ###Installation:
