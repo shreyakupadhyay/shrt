@@ -30,9 +30,21 @@ def _protocol(url):
     """
     parsed = urlparse(url)
     if parsed.scheme == "":
-        return "http://"+url
+        return "http://" + url
     else:
         return url
+
+
+def _check_netloc(url):
+    """
+    Checks if the url is already shortened
+    """
+    shortened_list = ["bit.ly", "goo.gl", "owl.ly", "deck.ly", "su.pr"]
+    parsed = urlparse(url)
+    if parsed.netloc in shortened_list:
+        return True
+    else:
+        return False
 
 
 def _is_valid_url(url):
@@ -119,7 +131,6 @@ def _expand_url(code):
         return long_url.url
 
 
-#app.route('/', methods=["POST"]) for API requests needs to implemented
 @app.route('/', methods=["GET"])
 def main():
     """
@@ -131,12 +142,17 @@ def main():
 @app.route('/form', methods=["POST"])
 def form():
     url = request.form['url']
-    short_url = _shorten_url(url)
-    if not short_url:
-        flash("invalid url, try again")
+    u = _protocol(url)
+    if _check_netloc(u):
+        flash("The Url is already short")
         return render_template("index.html")
     else:
-        return render_template('shortened.html', url=short_url)
+        short_url = _shorten_url(url)
+        if not short_url:
+            flash("Invalid url, try again")
+            return render_template("index.html")
+        else:
+            return render_template('shortened.html', url=short_url)
 
 
 @app.errorhandler(404)
@@ -160,7 +176,7 @@ def api(long_url=None):
 @app.route('/<string:handler>', methods=["GET"])
 def handle_url(handler=None):
     """
-    Function to return short url's to original url
+    Function to redirect short url's to original url
     """
     long_url = _expand_url(handler)
     if not long_url:

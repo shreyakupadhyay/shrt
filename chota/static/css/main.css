@@ -58,7 +58,8 @@ form {
     bottom: 0;
 }
 #link{
-    text-decoration: none
+    text-decoration: none;
+    color: black;
 }
 #linkmsg{
     font-size: 30px;
