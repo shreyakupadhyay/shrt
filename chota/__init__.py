@@ -9,3 +9,4 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
 
 import chota.routes
+import chota.models

@@ -11,14 +11,14 @@ Edit `__init__.py` and provide your db path instead of `os.environ['DATABASE_URL
 
 ###api:
 The api is very basic at the moment and needs a lot of improvement but it gets the job done, in order to shorten a url, send a GET request to chota-tk.herokuapp.com/api with long url.
-Request: 
+Request:
 ```
 curl http://chota-tk.herokuapp.com/api/google.com
 ```
 Response:
 ```
 {
-  "short_url": "http://chota-tk.herokuapp.com/czidce", 
+  "short_url": "http://chota-tk.herokuapp.com/czidce",
   "success": true
 }
 ```
