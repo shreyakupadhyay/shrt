@@ -2,6 +2,7 @@ from chota import db
 
 
 class Url(db.Model):
+
     """
     Class for creating models via SQLAlchemy
     """

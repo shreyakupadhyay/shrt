@@ -80,13 +80,13 @@ def _shorten_url(url):
     url = _protocol(url.strip())
     if _url_exists(url):
         long_url = Url.query.filter_by(url=url).first()
-        #Checks if someone has already shortened the same url
+        # Checks if someone has already shortened the same url
         if long_url is None:
             inserted = False
             random_code = _random_string()
             while not inserted:
                 check_code = Url.query.filter_by(random_code=random_code). \
-                             first()
+                    first()
                 if check_code is None:
                     short_url = Url(random_code, url)
                     db.session.add(short_url)
@@ -96,8 +96,8 @@ def _shorten_url(url):
                     random_code = _random_string()
             return "http://chota-tk.herokuapp.com/" + random_code
         else:
-            #If the url is present in the db, it returns the already created
-            #short url
+            # If the url is present in the db, it returns the already created
+            # short url
             return "http://chota-tk.herokuapp.com/" + long_url.random_code
     else:
         return False
@@ -108,7 +108,7 @@ def _expand_url(code):
     Returns expanded url
     """
     long_url = Url.query.filter_by(random_code=code).first()
-    #Checks if the short url is valid
+    # Checks if the short url is valid
     if long_url is None:
         return False
     else:
@@ -164,7 +164,7 @@ def handle_url(handler=None):
     """
     long_url = _expand_url(handler)
     if not long_url:
-        #Returns to the main page if the url is not presented in the database
+        # Returns to the main page if the url is not presented in the database
         return redirect('/', code=302)
     else:
         return redirect(long_url, code=302)
