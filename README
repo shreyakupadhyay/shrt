@@ -1,0 +1,25 @@
+// Chota //
+
+Chota - meaning short in Urdu - is an awesome url shortener written in Flask as my personal project to dive deeper into flask, it is simple yet powerful. Fork this repo and play around with it, don't forget to make pull requests and make it even better. See the app in action http://chota-tk.herokuapp.com/ 
+
+Installation:
+------------
+- Clone this repo $ git clone https://github.com/itsnauman/chota.git
+- Install the requirements $ pip install -r requirements.txt
+
+Setting up a development enviroment:
+-----------------------------------
+Edit __init__.py and provide the path for your local database, then you only need to run $ python runserver.py for starting the server
+
+Api:
+----
+The api is very basic at the moment and needs a lot of improvement but it gets the job done, in order to shorten a url, send a GET request to chota-tk.herokuapp.com/api with long url parameter.
+
+Contributing:
+------------
+- Improve loading speed
+- Tests
+
+License:
+--------
+Chota is distributed under MIT license, see LICENSE for more details.
