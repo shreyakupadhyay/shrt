@@ -13,7 +13,7 @@ Edit __init__.py and provide the path for your local database, then you only nee
 
 Api:
 ----
-The api is very basic at the moment and needs a lot of improvement but it gets the job done, in order to shorten a url, send a GET request to chota-tk.herokuapp.com/api with long url parameter.
+The api is very basic at the moment and needs a lot of improvement but it gets the job done, in order to shorten a url, send a GET request to http://chota-tk.herokuapp.com/api with long url parameter.
 
 Contributing:
 ------------
