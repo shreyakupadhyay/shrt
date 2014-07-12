@@ -128,6 +128,9 @@ def main():
 def form():
     url = request.form['url']
     u = _protocol(url)
+    if u == "http://chota-tk.herokuapp.com/":
+        flash("Can't shorten my own url")
+        return render_template("index.html")
     if _check_netloc(u):
         flash("The Url is already short")
         return render_template("index.html")
