@@ -1,11 +1,4 @@
-                                   ______ _                     
-                                  / _____) |          _         
-                                 | /     | | _   ___ | |_  ____ 
-                                 | |     | || \ / _ \|  _)/ _  |
-                                 | \_____| | | | |_| | |_( ( | |
-                                  \______)_| |_|\___/ \___)_||_|
-                               
-~ What is Chota?
+                         ~ What is Chota?
 
 Chota - meaning short in Urdu - is an awesome url shortener written in Flask as my personal project to dive deeper into flask, it is simple yet powerful. Fork this repo and play around with it, don't forget to make pull requests and make it even better. 
 
