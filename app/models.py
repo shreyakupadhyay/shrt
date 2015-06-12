@@ -1,11 +1,7 @@
-from chota import db
+from . import db
 
 
 class Url(db.Model):
-
-    """
-    Class for creating models via SQLAlchemy
-    """
     __tablename__ = "Url"
     id = db.Column('url_id', db.Integer, primary_key=True)
     random_code = db.Column(db.String(80), unique=True)
