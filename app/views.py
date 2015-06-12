@@ -62,10 +62,8 @@ def form():
 def handle_url(handler=None):
     link = expand_link(handler)
     if not link:
-        # Returns to the main page if the url is not presented in the database
         return redirect('/', code=302)
-    else:
-        return redirect(link, code=302)
+    return redirect(link, code=302)
 
 
 @app.errorhandler(404)
