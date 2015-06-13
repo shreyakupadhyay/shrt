@@ -57,7 +57,7 @@ class TestShrt(unittest.TestCase):
         r = self.client.get(self.key)
         self.assertEqual(r.status_code, 302)
         # Redirect to expanded link
-        assert "http://google.com" and "redirected" in r.data
+        assert self.test_url and "redirected" in r.data
 
     def test_expand_unshortened_link(self):
         r = self.client.get('abcd')
