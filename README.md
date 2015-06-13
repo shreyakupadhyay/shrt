@@ -1,4 +1,6 @@
-#Shrt
+#Shrt 
+[![Build Status](https://travis-ci.org/itsnauman/shrt.svg?branch=master)](https://travis-ci.org/itsnauman/shrt)
+
 Shrt is an awesome url shortener written in `Flask`.
 
 ###Development Setup:
