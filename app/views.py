@@ -1,7 +1,7 @@
 import httplib2
 import hashlib
 
-from flask import render_template, redirect, request, flash
+from flask import render_template, redirect, request, flash, url_for
 
 from . import app, db
 from .models import Url
@@ -53,19 +53,19 @@ def form():
     url = request.form['url']
     short_url = shorten_link(url)
     if not short_url:
-        flash("Link doesn't exist")
+        flash("Invalid Link")
         return render_template("index.html")
     return render_template('shortened.html', url=short_url)
 
 
 @app.route('/<string:handler>')
-def handle_url(handler=None):
+def handle_url(handler):
     link = expand_link(handler)
     if not link:
-        return redirect('/', code=302)
+        return redirect(url_for('index'))
     return redirect(link, code=302)
 
 
 @app.errorhandler(404)
 def handle_error(e):
-    return render_template("404.html"), 404
+    return render_template("404.html", err=e), 404
