@@ -1,6 +1,6 @@
 #Shrt 
 [![Build Status](https://travis-ci.org/itsnauman/shrt.svg?branch=master)](https://travis-ci.org/itsnauman/shrt)
-
+<img src="https://pilotmoon.com/popclip/extensions/icon/shortlink.png" width="280" alt="Postman Icon" align="right">
 Shrt is an awesome url shortener written in `Flask`.
 
 ###Development Setup:
