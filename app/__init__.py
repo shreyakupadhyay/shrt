@@ -15,4 +15,3 @@ db = SQLAlchemy(app)
 
 from . import models
 from . import views
-from . import api
