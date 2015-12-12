@@ -54,7 +54,7 @@ def form():
     short_url = shorten_link(url)
     if not short_url:
         flash("Invalid Link")
-        return render_template("index.html")
+        return redirect(url_for('index'))
     return render_template('shortened.html', url=short_url)
 
 
