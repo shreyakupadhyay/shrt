@@ -7,6 +7,7 @@ Shrt is an awesome url shortener written in `Flask`.
 
 ###Development Setup:
  - Clone this repo ```git clone https://github.com/itsnauman/shrt.git```
+ -    apt-get install libpq-dev 
  - ```pip install -r requirements.txt```
  - ```python runserver.py```
 
